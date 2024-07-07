@@ -17,3 +17,25 @@ export const productReducer = (state = { products: [] }, action) => {
             return state
     }
 }
+
+export const GetProductDetailsReducer = (state = { product: {} }, action) => {
+    switch (action.type) {
+        case 'getProductDetailsRequest':
+            return {
+                ...state,
+                loading: true
+            }
+        case 'getProductDetailsSuccess':
+            return {
+                loading: false,
+                product: action.payload
+            }
+        case 'getProductDetailsFail':
+            return {
+                loading: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}

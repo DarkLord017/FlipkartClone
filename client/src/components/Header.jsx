@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { DataContext } from '../context/DataProvider';
-
+import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material';
 import Search from './Search';
 
@@ -16,9 +16,11 @@ const StyledHeader = styled(AppBar)`
     height: 55px;
 `;
 
-const Component = styled(Box)`
+const Component = styled(Link)`
    margin-left: 1%;
    line-height: 0;
+   text-decoration: none;
+   color: 'inherit';
 `;
 
 const SubHeading = styled(Typography)`
@@ -49,7 +51,7 @@ const Header = () => {
             <StyledHeader position="static" style={{ minHeight: '55px' }}>
                 <Toolbar>
                     <div style={{ flexDirection: 'column', marginLeft: '12%' }}>
-                        <Component>
+                        <Component to='/'>
                             <img src={logoURL} alt="Flipkart" style={{ width: 85 }} />
                         </Component>
                         <Box>

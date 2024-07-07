@@ -1,6 +1,6 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
+import { Link } from 'react-router-dom';
 import Countdown from 'react-countdown';
 
 import { Box, Button, Typography, styled, Divider } from '@mui/material';
@@ -76,14 +76,16 @@ const Slide = ({ products, title, timer }) => {
                 slidesToSlide={1}
                 style={{ marginTop: '40px' }}>
                 {
-                    products.map(product =>
-                        <Box textAlign="center" style={{ padding: '25px 50px' }} >
-                            <Image src={product.url} alt="product" style={{ width: '100%', height: '100%' }} />
-                            <Typography style={{ fontSize: '14px', marginTop: '5px', fontWeight: 'bold', color: '#212121' }}>{product.title.shortTitle}</Typography>
-                            <Typography style={{ fontSize: '14px', marginTop: '5px', color: 'green' }}>{product.discount}</Typography>
-                            <Typography style={{ fontSize: '14px', marginTop: '5px', color: '#212121', opacity: '0.6' }}>{product.tagline}</Typography>
-                        </Box>
-                    )
+                    products.map(product => (
+                        <Link to={`product/${product.id}`} style={{ textDecoration: 'none' }} key={product.id}>
+                            <Box textAlign="center" style={{ padding: '25px 50px' }} >
+                                <Image src={product.url} alt="product" style={{ width: '100%', height: '100%' }} />
+                                <Typography style={{ fontSize: '14px', marginTop: '5px', fontWeight: 'bold', color: '#212121' }}>{product.title.shortTitle}</Typography>
+                                <Typography style={{ fontSize: '14px', marginTop: '5px', color: 'green' }}>{product.discount}</Typography>
+                                <Typography style={{ fontSize: '14px', marginTop: '5px', color: '#212121', opacity: '0.6' }}>{product.tagline}</Typography>
+                            </Box>
+                        </Link>
+                    ))
                 }
             </Carousel>
         </Box >
