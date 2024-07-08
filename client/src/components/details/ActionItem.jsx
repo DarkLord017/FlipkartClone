@@ -3,13 +3,23 @@ import { Box, Button } from '@mui/material';
 import { AddToCart } from '../../redux/actions/cartActions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useContext } from 'react';
+import { DataContext } from '../../context/DataProvider';
+import { SaveToCart } from '../../service/api';
 
 const ActionItem = ({ product }) => {
+    const { account } = useContext(DataContext);
     const [quantity, setQuantity] = useState(1);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const addItemToCart = () => {
+        if (account) {
+            SaveToCart({
+                username: account,
+                products: product
+            })
+        }
         dispatch(AddToCart(product.id, quantity));
         navigate('/cart');
     }

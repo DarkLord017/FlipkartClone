@@ -41,3 +41,23 @@ export const UserLogin = async (req, res) => {
         console.log(error);
     }
 }
+
+export const UserCart = async (req, res) => {
+    try {
+        console.log("Hello guys chai pilo")
+        const username = req.body.username;
+        const user = await User.findOne({
+            username: username
+        });
+        if (!user) {
+            return res.status(401).json({ message: "Invalid username or password" });
+        }
+        user.products = [...user.products, req.body.products]
+        await user.save();
+
+        res.status(200).json({ message: user });
+
+    } catch (error) {
+        console.log(error)
+    }
+}

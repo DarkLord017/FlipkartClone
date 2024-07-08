@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-
+import { useEffect, useContext } from 'react';
+import { DataContext } from '../../context/DataProvider';
 import { Box, Typography, Button, Grid, styled } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
@@ -51,9 +51,14 @@ const StyledButton = styled(Button)`
 `;
 
 const Cart = () => {
+    const { account } = useContext(DataContext);
     const cartDetails = useSelector(state => state.cart);
     const { cartItems } = cartDetails;
     const { id } = useParams();
+
+    if (!account) {
+        console.log("have fun")
+    }
 
     const dispatch = useDispatch();
 
@@ -96,6 +101,15 @@ const Cart = () => {
                     </Grid>
                 </Component> : <EmptyCart />
             }
+            {/* {
+                account &&
+                account.products
+                    .filter(product => !cartItems.some(cartItem => cartItem.id === product.id))
+                    .map(product => (
+                        <CartItem key={product.id} item={product} removeItemFromCart={removeItemFromCart} />
+                    ))
+            } */}
+
         </>
 
     )

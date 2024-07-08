@@ -39,3 +39,21 @@ export const authenticateLogIn = async (userData) => {
         }
     }
 };
+
+export const SaveToCart = async (product) => {
+    try {
+        return await axios.post('http://localhost:8000/saveToCart', product)
+    } catch (error) {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error('Server responded with an error:', error.response.data);
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error('No response received:', error.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('Error setting up request:', error.message);
+        }
+    }
+}
